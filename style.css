@@ -1,0 +1,193 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    /* --- BACKGROUND IMAGE BARU --- */
+    background-image: url('langit.jpg'); /* Ganti 'background.jpg' dengan nama file Anda */
+    background-size: cover; /* Memastikan gambar menutupi seluruh background */
+    background-position: center; /* Memusatkan gambar */
+    background-attachment: fixed; /* Membuat gambar tetap (tidak ikut scroll) */
+    background-color: #f4f7f6; /* Warna cadangan jika gambar gagal dimuat */
+    /* --- AKHIR BACKGROUND IMAGE --- */
+}
+
+.container {
+    padding: 40px 60px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 90%;
+    position: relative; /* Penting agar z-index bekerja relatif terhadap dokumen */
+    z-index: 1; /* Pastikan di atas animation-container */
+    /* ... CSS container lainnya ... */
+}
+
+
+h1 {
+    color: whitesmoke;
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: rgb(255, 94, 94);
+    margin-bottom: 25px;
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: 25px;
+    color: whitesmoke;
+}
+
+/* Style untuk Tombol di index.html */
+#nextPageButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#nextPageButton:hover {
+    background-color: #0056b3;
+}
+
+/* Style untuk Pesan Semangat di page2.html */
+.semangat-message {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: powderblue; /* Warna yang menarik perhatian */
+    padding: 20px;
+    border: 3px solid midnightblue;
+    border-radius: 10px;
+}
+
+/* Style untuk Link Kembali */
+.back-link {
+    display: inline-block;
+    margin-top: 30px;
+    color: whitesmoke;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: #657585;
+}
+
+/* ... CSS yang sudah ada ... */
+
+/* Untuk memastikan elemen animasi tidak mengganggu konten */
+.animation-container {
+    position: fixed; /* Tetap di viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Sembunyikan elemen di luar area */
+    pointer-events: none; /* Penting! Agar user bisa klik konten di belakangnya */
+    z-index: -1; /* Pindah ke belakang konten utama */
+}
+
+/* Base style untuk elemen hati */
+.animated-love {
+    position: absolute;
+    font-size: 2em; /* Ukuran awal */
+    color: #ff69b4; /* Warna pink hati */
+    animation: floatUp 10s ease-in forwards, fadeOut 10s ease-in forwards;
+    opacity: 0; /* Mulai tersembunyi */
+    transform: scale(0.5); /* Mulai kecil */
+}
+
+/* Base style untuk elemen bunga */
+.animated-flower {
+    position: absolute;
+    font-size: 1.5em; /* Ukuran awal */
+    color: #8aff8a; /* Warna hijau muda untuk daun/batang */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7); /* Efek glow ringan */
+    animation: floatDownRotate 12s linear forwards, fadeOut 12s ease-in forwards;
+    opacity: 0; /* Mulai tersembunyi */
+    transform: scale(0.3); /* Mulai kecil */
+}
+
+/* Variasi warna bunga (opsional, bisa diatur JS) */
+.animated-flower.red { color: #ff6347; } /* Tomato */
+.animated-flower.yellow { color: #ffd700; } /* Gold */
+.animated-flower.blue { color: #6a5acd; } /* SlateBlue */
+.animated-flower.purple { color: #9370db; } /* MediumPurple */
+
+
+/* KEYFRAMES ANIMASI */
+
+/* Animasi hati naik ke atas */
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(0.5) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1; /* Muncul penuh */
+    }
+    100% {
+        transform: translateY(-100vh) scale(1.5) rotate(360deg); /* Bergerak ke atas, membesar, berputar */
+        opacity: 0; /* Menghilang di akhir */
+    }
+}
+
+/* Animasi bunga jatuh dan berputar */
+@keyframes floatDownRotate {
+    0% {
+        transform: translateY(-50px) scale(0.3) rotate(0deg); /* Mulai dari atas */
+        opacity: 0;
+    }
+    20% {
+        opacity: 1; /* Muncul penuh */
+    }
+    100% {
+        transform: translateY(100vh) scale(1) rotate(720deg); /* Bergerak ke bawah, membesar, berputar */
+        opacity: 0; /* Menghilang di akhir */
+    }
+}
+
+/* Animasi memudar (dipakai oleh keduanya) */
+@keyframes fadeOut {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Untuk memastikan konten utama tidak tertimpa animasi */
+
+/* Style untuk Tombol Kontrol Musik */
+.music-control-button {
+    position: fixed; /* Tetap di tempat */
+    bottom: 20px; 
+    right: 20px;
+    z-index: 100; /* Ditinggikan agar selalu terlihat di atas */
+    
+    /* PROPERTI YANG DISESUAIKAN DAN DITAMBAHKAN */
+    background-color: rgba(51, 51, 51, 0.2); /* Latar Belakang Transparan (dari langkah sebelumnya) */
+    color: white; /* Warna Teks */
+    border: none; /* Hilangkan Border */
+
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Disesuaikan dengan .container */
+}
+
+.music-control-button:hover {
+    background-color: rgba(85, 85, 85, 0.8); /* Warna hover agar terlihat ada interaksi */
+}
